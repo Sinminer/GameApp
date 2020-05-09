@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">EducationApp</string>
+    <string name="enter_your_name">Enter your name:</string>
+    <string name="play">Play!</string>
+    <string name="settings">Settings</string>
+
+
+    <string-array name="Minigames">
+        <item>Three</item>
+        <item>Five</item>
+        <item>Ten</item>
+        <item>Twenty</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gallows">galllows</string>
+    <string name="head">head</string>
+    <string name="body">body</string>
+    <string name="arm">arm</string>
+    <string name="leg">leg</string>
+    <string name="shake_the_phone">Shake the Phone!</string>
+    <string name="_0">0</string>
+
+    <string-array name="words">
+        <item>Tea</item>
+        <item>Woke</item>
+        <item>Slay</item>
+        <item>Shade</item>
+        <item>Extra</item>
+        <item>Phone</item>
+    </string-array>
+</resources>
