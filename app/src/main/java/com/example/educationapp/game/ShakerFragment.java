@@ -48,7 +48,7 @@ SensorManager sensorManager = null;
         View view = inflater.inflate(R.layout.fragment_shaker,container,false);
         fillScore = view.findViewById(R.id.fillTotal);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shaker, container, false);
+        return view;
     }
     public void register(){
         sensorManager.registerListener(this,shakeSensor,SensorManager.SENSOR_DELAY_NORMAL);

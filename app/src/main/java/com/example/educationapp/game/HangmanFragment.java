@@ -60,6 +60,7 @@ public class HangmanFragment extends Fragment implements View.OnClickListener {
         numChars = currWord.length();
         numCorr = 0;
         bodyParts = new ImageView[numParts];
+        words = getResources().getStringArray(R.array.words);
         for(int p = 0; p < numParts; p++) {
             bodyParts[p].setVisibility(View.INVISIBLE);
         }

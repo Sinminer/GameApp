@@ -5,20 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button playButton;
     private static final String NAME = "NAME";
     private Button settingsButton;
-    TextView nameView;
+    EditText nameView;
     String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nameView = findViewById(R.id.textView);
-
+        name = nameView.getText().toString();
         playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener((v)-> {
             openGame();
@@ -32,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openSettings(){
         Intent intent = new Intent(this,SettingsActivity.class);
+        startActivity(intent);
     }
     public void openGame(){
         Intent intent = new Intent(this, GameActivity.class);
-        name = nameView.getText().toString();
         intent.putExtra(NAME,name);
         startActivity(intent);
     }
