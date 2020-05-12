@@ -18,8 +18,9 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+         hangmanFragment = new HangmanFragment();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container,new HangmanFragment());
+        fragmentTransaction.replace(R.id.fragment_container, hangmanFragment);
         fragmentTransaction.commit();
     }
 

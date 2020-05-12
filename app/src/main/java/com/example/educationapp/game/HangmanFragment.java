@@ -71,7 +71,6 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
 
         wordLayout = view.findViewById(R.id.word);
 
-
         makeGame();
         return view;
         
