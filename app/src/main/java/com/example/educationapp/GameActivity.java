@@ -6,10 +6,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.example.educationapp.game.HangmanFragment;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+public class GameActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
     FragmentManager fragmentManager;
     HangmanFragment hangmanFragment;
     FragmentTransaction fragmentTransaction;
@@ -22,12 +23,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     public void letterPressed(View view) {
         hangmanFragment.letterPressed(view);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

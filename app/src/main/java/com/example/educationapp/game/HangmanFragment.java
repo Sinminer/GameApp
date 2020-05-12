@@ -4,16 +4,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.educationapp.GameActivity;
 import com.example.educationapp.R;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,9 +23,9 @@ import java.util.Random;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HangmanFragment extends Fragment implements View.OnClickListener {
+public class HangmanFragment extends Fragment implements AdapterView.OnItemClickListener {
     private ImageView[] bodyParts;
-    private int numParts=5;
+    private int numParts=6;
     private int currPart;
     private int numChars;
     private int numCorr;
@@ -36,12 +35,8 @@ public class HangmanFragment extends Fragment implements View.OnClickListener {
     private LinearLayout wordLayout;
     private TextView[] charViews;
     private GridView letterGrid;
-    private LetterAdapater letterAdapater;
+    private LetterAdapter letterAdapater;
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     public HangmanFragment() {
         // Required empty public constructor
@@ -53,37 +48,37 @@ public class HangmanFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hangman,container,false);
-
+        letterGrid = view.findViewById(R.id.letters);
+        letterAdapater = new LetterAdapter(view.getContext());
+        letterGrid.setAdapter(letterAdapater);
         random = new Random();
+        letterGrid.setOnItemClickListener(this);
         currWord = "";
         currPart = 0;
         numChars = currWord.length();
         numCorr = 0;
         bodyParts = new ImageView[numParts];
         words = getResources().getStringArray(R.array.words);
-        for(int p = 0; p < numParts; p++) {
-            bodyParts[p].setVisibility(View.INVISIBLE);
-        }
-
-        wordLayout = view.findViewById(R.id.word);
-
-        letterGrid = view.findViewById(R.id.letters);
-
-
         bodyParts[0] = view.findViewById(R.id.head);
         bodyParts[1] = view.findViewById(R.id.body);
         bodyParts[2] = view.findViewById(R.id.arm1);
         bodyParts[3] = view.findViewById(R.id.arm2);
         bodyParts[4] = view.findViewById(R.id.leg1);
         bodyParts[5] = view.findViewById(R.id.leg2);
+        for(int p = 0; p < numParts; p++) {
+            bodyParts[p].setVisibility(View.INVISIBLE);
+        }
+
+        wordLayout = view.findViewById(R.id.word);
+
+
+        makeGame();
         return view;
         
     }
 
     private void makeGame(){
         currWord = words[random.nextInt(words.length)];
-        letterAdapater = new LetterAdapater(this.getContext());
-        letterGrid.setAdapter(letterAdapater);
         charViews = new TextView[currWord.length()];
         wordLayout.removeAllViews();
         for (int c = 0; c < currWord.length(); c++) {
@@ -138,4 +133,9 @@ public class HangmanFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
-}
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+    }

@@ -75,11 +75,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
     </LinearLayout>
     <GridView
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:id="@+id/letters"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
@@ -88,8 +89,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:numColumns="7"
         android:padding="5dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:onClick="letterPressed"/>
+        android:verticalSpacing="5dp"></GridView>
+<!--        android:onClick="letterPressed"/>-->
 </androidx.appcompat.widget.LinearLayoutCompat>
 
 

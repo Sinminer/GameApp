@@ -9,12 +9,12 @@ import android.widget.Button;
 
 import com.example.educationapp.R;
 
-public class LetterAdapater extends BaseAdapter {
+public class LetterAdapter extends BaseAdapter {
     private String[] alphabet;
     private LayoutInflater layoutInflater;
 
 
-    public LetterAdapater(Context context){
+    public LetterAdapter(Context context){
         alphabet = new String[26];
         for (int i = 0; i < alphabet.length; i++){
             alphabet[i] = "" + (char)(i+'A');
