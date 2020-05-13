@@ -23,11 +23,11 @@
     <string name="_0">0</string>
 
     <string-array name="words">
-        <item>Tea</item>
-        <item>Woke</item>
-        <item>Slay</item>
-        <item>Shade</item>
-        <item>Extra</item>
-        <item>Phone</item>
+        <item>TEA</item>
+        <item>WOKE</item>
+        <item>SLAY</item>
+        <item>SHADE</item>
+        <item>EXTRA</item>
+        <item>PHONE</item>
     </string-array>
 </resources>

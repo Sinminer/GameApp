@@ -55,7 +55,7 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
         letterGrid.setOnItemClickListener(this);
         currWord = "";
         currPart = 0;
-        numChars = currWord.length();
+
         numCorr = 0;
         bodyParts = new ImageView[numParts];
         words = getResources().getStringArray(R.array.words);
@@ -79,6 +79,7 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
     private void makeGame(){
         currWord = words[random.nextInt(words.length)];
         charViews = new TextView[currWord.length()];
+        numChars = currWord.length();
         wordLayout.removeAllViews();
         for (int c = 0; c < currWord.length(); c++) {
             charViews[c] = new TextView(this.getContext());
@@ -110,11 +111,12 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
 
         boolean correct = false;
         for(int k = 0; k < currWord.length(); k++) {
-            if(currWord.charAt(k)==letterChar){
+            if (currWord.charAt(k) == letterChar) {
                 correct = true;
                 numCorr++;
                 charViews[k].setTextColor(Color.BLACK);
             }
+        }
             if (correct) {
                 //correct guess
             }else if (currPart < numParts){
@@ -122,19 +124,20 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
                 currPart++;
             }else {
                 disableBtns();
-                Toast toast = Toast.makeText(getActivity(),"You lost",Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getActivity(),"You lost the word was " + currWord,Toast.LENGTH_SHORT);
                 toast.show();
-            }
 
+            }
             if (numCorr == numChars) {
+                disableBtns();
                 Toast toast = Toast.makeText(getActivity(),"You win",Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
-    }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        letterPressed(view);
         }
     }

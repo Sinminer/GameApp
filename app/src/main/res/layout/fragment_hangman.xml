@@ -89,8 +89,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:numColumns="7"
         android:padding="5dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"></GridView>
-<!--        android:onClick="letterPressed"/>-->
+        android:verticalSpacing="5dp" />
 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
