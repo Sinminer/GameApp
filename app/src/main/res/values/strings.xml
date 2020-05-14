@@ -21,6 +21,7 @@
     <string name="leg">leg</string>
     <string name="shake_the_phone">Shake the Phone!</string>
     <string name="_0">0</string>
+    <string name="light">light</string>
 
     <string-array name="words">
         <item>TEA</item>

@@ -42,16 +42,15 @@ SensorManager sensorManager = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_shaker,container,false);
+
         sensorManager = (SensorManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SENSOR_SERVICE);
         assert sensorManager != null;
+        sensorManager.registerListener(this,shakeSensor,SensorManager.SENSOR_DELAY_NORMAL);
         shakeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        View view = inflater.inflate(R.layout.fragment_shaker,container,false);
         fillScore = view.findViewById(R.id.fillTotal);
         // Inflate the layout for this fragment
         return view;
-    }
-    public void register(){
-        sensorManager.registerListener(this,shakeSensor,SensorManager.SENSOR_DELAY_NORMAL);
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
