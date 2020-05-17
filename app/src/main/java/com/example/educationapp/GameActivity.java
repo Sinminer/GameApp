@@ -6,12 +6,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.educationapp.game.HangmanFragment;
@@ -30,6 +32,7 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
     ShakerFragment shakerFragment;
     ArrayList<Fragment> fragments;
     public static int SCORE = 0;
+    ImageButton helpButton;
     Random random;
      public static GameActivity gameActivity;
 
@@ -37,7 +40,7 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameActivity = this;
-
+        helpButton = findViewById(R.id.help);
         random = new Random();
         hangmanFragment = new HangmanFragment();
         shakerFragment = new ShakerFragment();
@@ -96,5 +99,4 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         shakerFragment.onAccuracyChanged(sensor,accuracy);
     }
-
 }
