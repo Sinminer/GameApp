@@ -5,30 +5,40 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.example.educationapp.game.HangmanFragment;
 import com.example.educationapp.game.LightFragment;
+import com.example.educationapp.game.MenuFragment;
 import com.example.educationapp.game.ShakerFragment;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener, View.OnClickListener {
-    FragmentManager fragmentManager;
+public class GameActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener, View.OnClickListener, SensorEventListener {
+
     HangmanFragment hangmanFragment;
     LightFragment lightFragment;
-    FragmentTransaction fragmentTransaction;
+    TextView updateScore;
     ShakerFragment shakerFragment;
     ArrayList<Fragment> fragments;
+    public static int SCORE = 0;
+    Random random;
+     public static GameActivity gameActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Random random = new Random();
+        gameActivity = this;
 
+        random = new Random();
         hangmanFragment = new HangmanFragment();
         shakerFragment = new ShakerFragment();
         lightFragment = new LightFragment();
@@ -37,7 +47,7 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
         fragments.add(shakerFragment);
         fragments.add(lightFragment);
         setContentView(R.layout.activity_game);
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragments.get(random.nextInt(3)));
         fragmentTransaction.commit();
     }
@@ -57,5 +67,34 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
         lightFragment.onClick(v);
     }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    public void endGame(){
+        SCORE++;
+        updateScore = findViewById(R.id.score);
+       updateScore.setText(String.format("Score: %d", SCORE));
+        FragmentTransaction fragmentTransaction;
+         fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragments.get(random.nextInt(3)));
+        fragmentTransaction.commit();
+    }
+    @SuppressLint("DefaultLocale")
+    public void lostGame(){
+        updateScore = findViewById(R.id.score);
+        updateScore.setText(String.format("Score: %d", SCORE));
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,fragments.get(random.nextInt(3)));
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        shakerFragment.onSensorChanged(event);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        shakerFragment.onAccuracyChanged(sensor,accuracy);
+    }
 
 }

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.educationapp.GameActivity;
 import com.example.educationapp.R;
 
 import static com.example.educationapp.R.color.White;
@@ -27,6 +28,7 @@ public class LightFragment extends Fragment implements View.OnClickListener {
     Button light4;
     Integer currentLights = 0;
     Integer allLights = 4;
+
     public LightFragment() {
         // Required empty public constructor
     }
@@ -49,12 +51,9 @@ public class LightFragment extends Fragment implements View.OnClickListener {
         v.setBackgroundColor(getResources().getColor(R.color.Yellow));
         currentLights++;
         if (currentLights.equals(allLights)){
-            Toast toast = Toast.makeText(this.getActivity(),"Nice Job",Toast.LENGTH_SHORT);
-            toast.show();
-
+            currentLights = 0;
+            v.setBackgroundColor(getResources().getColor(R.color.Black));
+            GameActivity.gameActivity.endGame();
         }
-    }
-    public void endGame(){
-        
     }
 }
