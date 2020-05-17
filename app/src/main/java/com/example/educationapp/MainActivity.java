@@ -2,11 +2,16 @@ package com.example.educationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.educationapp.game.MenuFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Button playButton;
@@ -14,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsButton;
     EditText nameView;
     String name;
+    ImageButton helpButton;
+    private AlertDialog helpAlert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         nameView = findViewById(R.id.textView);
         name = nameView.getText().toString();
         playButton = findViewById(R.id.playButton);
-        playButton.setOnClickListener((v)-> {
+        playButton.setOnClickListener((v) -> {
             openGame();
         });
 

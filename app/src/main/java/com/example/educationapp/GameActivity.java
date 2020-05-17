@@ -40,7 +40,6 @@ public class GameActivity extends AppCompatActivity  implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameActivity = this;
-        helpButton = findViewById(R.id.help);
         random = new Random();
         hangmanFragment = new HangmanFragment();
         shakerFragment = new ShakerFragment();
