@@ -21,6 +21,7 @@
     </FrameLayout>
 
     <fragment
+        tools:layout="@layout/fragment_menu"
         android:name="com.example.educationapp.game.MenuFragment"
         android:id="@+id/menuFragment"
         android:layout_width="match_parent"

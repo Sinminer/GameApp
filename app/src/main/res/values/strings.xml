@@ -25,6 +25,7 @@
     <string name="score_0">Score: 0</string>
     <string name="turn_the_lights_on">Turn the lights on!</string>
     <string name="start">Start!</string>
+    <string name="time">Time:</string>
     <string-array name="difficulty">
     <item>Easy</item>
     <item>Medium</item>

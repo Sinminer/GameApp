@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "Education";
-    private static final int DB_VERSION = 0;
+    private static final int DB_VERSION = 1;
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE PLAYERSCORE (_id INTEGER PRIMARY KEY AUTOINCREMENT," + "NAME  TEXT," + " INTERGER SCORE)");
+        db.execSQL("CREATE TABLE PLAYERSCORE (_id INTEGER PRIMARY KEY AUTOINCREMENT," + "NAME  TEXT," + "SCORE INTERGER )");
     }
 
     @Override
@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateDataBase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
-            db.execSQL("CREATE TABLE PLAYERSCORE (_id INTEGER PRIMARY KEY AUTOINCREMENT," + "NAME  TEXT," + " INTERGER SCORE)");
+            db.execSQL("CREATE TABLE PLAYERSCORE (_id INTEGER PRIMARY KEY AUTOINCREMENT," + "NAME TEXT," + " SCORE INTERGER )");
             insertScore("PLAYERSCORE", "Rob", 20);
             insertScore("PLAYERSCORE", "Tom", 9);
         }

@@ -13,9 +13,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.educationapp.database.DatabaseHelper;
@@ -40,6 +42,7 @@ DatabaseHelper dbHelper;
     public static int SCORE = 0;
     String name;
     Random random;
+    FrameLayout frameLayout;
      public static GameActivity gameActivity;
 
     @Override
@@ -59,14 +62,17 @@ DatabaseHelper dbHelper;
         Intent intent = new Intent(this,MainActivity.class);
         name = intent.getStringExtra(NAME);
 
-        dbHelper = new DatabaseHelper(this);
+        frameLayout = findViewById(R.id.fragment_container);
+        
 
+        dbHelper = new DatabaseHelper(this);
         dbHelper.insertScore("PLAYERSCORE",name,SCORE);
 
         setContentView(R.layout.activity_game);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragments.get(random.nextInt(3)));
         fragmentTransaction.commit();
+
     }
 
 

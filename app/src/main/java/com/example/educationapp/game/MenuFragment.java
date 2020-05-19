@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.example.educationapp.GameActivity;
 import com.example.educationapp.MainActivity;
 import com.example.educationapp.R;
 
+import org.w3c.dom.Text;
+
 import java.util.Timer;
 
 /**
@@ -28,7 +31,6 @@ public class MenuFragment extends Fragment {
     private TextView scoreScreen;
     private ImageButton helpButton;
     private Button startButton;
-
     public static final String MESSAGE = "Welcome to RoboWare, this game is meant to test your reactions " +
             "and memory by giving you a set time to get through as many minigames as " +
             "possible. Once your time runs out your score will be saved." +
@@ -36,13 +38,29 @@ public class MenuFragment extends Fragment {
     public static final String TITLE = "Help";
     private AlertDialog helpAlert;
     ImageButton backButton;
+    TextView timer;
+    int time = 60;
+
+
+
+
+
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (time < 1){
+                timer.setText(String.format("Time:%d",time));
+                timerHandler.postDelayed(timerRunnable,1000);
+                time -= 1;
+            }
+        }
+    };
 
     public MenuFragment() {
         // Required empty public constructor
     }
 
-
-    @SuppressLint("DefaultLocale")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,8 +71,10 @@ public class MenuFragment extends Fragment {
         scoreScreen.setText(String.format("Score: %d", score));
         helpButton = view.findViewById(R.id.help);
         startButton = view.findViewById(R.id.startButton);
-        startButton.setOnClickListener(v -> {
+        timer = view.findViewById(R.id.timer);
 
+        startButton.setOnClickListener(v -> {
+            timerRunnable.run();
         });
 
         helpButton.setOnClickListener(v -> {

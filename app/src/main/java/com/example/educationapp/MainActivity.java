@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nameView = findViewById(R.id.textView);
-        name = nameView.getText().toString();
         playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener((v) -> {
+            name = nameView.getText().toString();
             openGame();
         });
 
