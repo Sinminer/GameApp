@@ -9,8 +9,8 @@ import android.widget.Spinner;
 import com.example.educationapp.game.Difficulty;
 
 public class SettingsActivity extends AppCompatActivity {
-Spinner diffSpinner;
-Difficulty level;
+    Spinner diffSpinner;
+    Difficulty level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

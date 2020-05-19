@@ -25,12 +25,13 @@ import com.example.educationapp.R;
  * A simple {@link Fragment} subclass.
  */
 public class ShakerFragment extends Fragment implements SensorEventListener {
-TextView fillScore;
-SensorManager sensorManager;
+    TextView fillScore;
+    SensorManager sensorManager;
     Sensor shakeSensor;
     Float[] gravity;
     int count;
     private final static int SHAKERTHRESHOLD = 10;
+
     public ShakerFragment() {
         // Required empty public constructor
     }
@@ -40,43 +41,44 @@ SensorManager sensorManager;
         super.onCreate(savedInstanceState);
         sensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
         shakeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this,shakeSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, shakeSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_shaker,container,false);
+        View view = inflater.inflate(R.layout.fragment_shaker, container, false);
         fillScore = view.findViewById(R.id.fillTotal);
         gravity = new Float[4];
         // Inflate the layout for this fragment
         return view;
     }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-           float x = event.values[0];
-           float y = event.values[1];
-           float z = event.values[2];
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
 
-           double accel = Math.sqrt(Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2));
-           if (accel > SHAKERTHRESHOLD){
-               count++;
-               fillScore.setText("" + count);
-               if (count == 5){
-                   Toast toast = Toast.makeText(getActivity(),"Keep Shaking!",Toast.LENGTH_SHORT);
-                   toast.show();
-               }else if (count >= 20){
-                   count = 0;
-                   GameActivity.gameActivity.endGame();
-               }
+            double accel = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+            if (accel > SHAKERTHRESHOLD) {
+                count++;
+                fillScore.setText("" + count);
+                if (count == 5) {
+                    Toast toast = Toast.makeText(getActivity(), "Keep Shaking!", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else if (count >= 20) {
+                    count = 0;
+                    GameActivity.gameActivity.endGame();
+                }
 
-           }
+            }
         }
 
-        }
+    }
 
     @Override
     public void onDestroy() {

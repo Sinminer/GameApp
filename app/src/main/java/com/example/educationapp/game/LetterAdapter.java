@@ -14,13 +14,14 @@ public class LetterAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
 
 
-    public LetterAdapter(Context context){
+    public LetterAdapter(Context context) {
         alphabet = new String[26];
-        for (int i = 0; i < alphabet.length; i++){
-            alphabet[i] = "" + (char)(i+'A');
+        for (int i = 0; i < alphabet.length; i++) {
+            alphabet[i] = "" + (char) (i + 'A');
         }
-    layoutInflater = LayoutInflater.from(context);
+        layoutInflater = LayoutInflater.from(context);
     }
+
     @Override
     public int getCount() {
         return alphabet.length;
@@ -39,10 +40,10 @@ public class LetterAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Button button;
-        if (convertView == null){
-            button = (Button)layoutInflater.inflate(R.layout.letter,parent,false);
-        }else {
-            button = (Button)convertView;
+        if (convertView == null) {
+            button = (Button) layoutInflater.inflate(R.layout.letter, parent, false);
+        } else {
+            button = (Button) convertView;
         }
         button.setText(alphabet[position]);
         return button;
