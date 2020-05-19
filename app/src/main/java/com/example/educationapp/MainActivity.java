@@ -19,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsButton;
     EditText nameView;
     String name;
-    ImageButton helpButton;
-    private AlertDialog helpAlert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

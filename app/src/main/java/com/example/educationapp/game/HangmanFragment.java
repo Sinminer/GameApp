@@ -78,6 +78,7 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
     }
 
     private void makeGame() {
+
         currWord = words[random.nextInt(words.length)];
         charViews = new TextView[currWord.length()];
         numChars = currWord.length();
@@ -96,12 +97,12 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
     }
 
 
-    public void disableBtns() {
-        int numLetters = letterGrid.getChildCount();
-        for (int l = 0; l < numLetters; l++) {
-            letterGrid.getChildAt(l).setEnabled(false);
-        }
-    }
+//    public void disableBtns() {
+//        int numLetters = letterGrid.getChildCount();
+//        for (int l = 0; l < numLetters; l++) {
+//            letterGrid.getChildAt(l).setEnabled(false);
+//        }
+//    }
 
     public void letterPressed(View view) {
 
@@ -124,15 +125,21 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
             bodyParts[currPart].setVisibility(View.VISIBLE);
             currPart++;
         } else {
-            disableBtns();
+            makeGame();
             GameActivity.gameActivity.lostGame();
+            onDestroy();
         }
         if (numCorr == numChars) {
-            disableBtns();
+            makeGame();
             GameActivity.gameActivity.endGame();
+            onDestroy();
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

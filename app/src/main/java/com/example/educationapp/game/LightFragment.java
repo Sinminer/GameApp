@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.example.educationapp.GameActivity;
 import com.example.educationapp.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static com.example.educationapp.R.color.White;
 
 /**
@@ -28,6 +31,7 @@ public class LightFragment extends Fragment implements View.OnClickListener {
     Button light4;
     Integer currentLights = 0;
     Integer allLights = 4;
+    ArrayList<Button> lights;
 
     public LightFragment() {
         // Required empty public constructor
@@ -43,7 +47,11 @@ public class LightFragment extends Fragment implements View.OnClickListener {
         light2 = view.findViewById(R.id.light2);
         light3 = view.findViewById(R.id.light3);
         light4 = view.findViewById(R.id.light4);
-
+        lights = new ArrayList<>(4);
+        lights.add(light1);
+        lights.add(light2);
+        lights.add(light3);
+        lights.add(light4);
         return view;
     }
 
@@ -52,8 +60,21 @@ public class LightFragment extends Fragment implements View.OnClickListener {
         currentLights++;
         if (currentLights.equals(allLights)){
             currentLights = 0;
-            v.setBackgroundColor(getResources().getColor(R.color.Black));
             GameActivity.gameActivity.endGame();
+            setAllLightsOn();
+            onDestroy();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+    }
+    public void setAllLightsOn(){
+        for (int i = 0; i < 4; i++){
+         lights.get(i).setBackgroundColor(getResources().getColor(R.color.Black));
         }
     }
 }

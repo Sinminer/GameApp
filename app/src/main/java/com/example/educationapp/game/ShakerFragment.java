@@ -82,6 +82,7 @@ SensorManager sensorManager;
     public void onDestroy() {
         super.onDestroy();
         sensorManager.unregisterListener(this);
+
     }
 
     @Override
