@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -38,25 +39,25 @@ public class MenuFragment extends Fragment {
     public static final String TITLE = "Help";
     private AlertDialog helpAlert;
     ImageButton backButton;
+    FrameLayout frameLayout;
     TextView timer;
-    int time = 60;
-
-
-
-
-
+    int time = 5;
+    boolean shutdown = false;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
-            if (time < 1){
-                timer.setText(String.format("Time:%d",time));
-                timerHandler.postDelayed(timerRunnable,1000);
+            if(!shutdown) {
+                timer.setText(String.format("Time:%d", time));
+                timerHandler.postDelayed(timerRunnable, 1000);
                 time -= 1;
+                if (time == -1) {
+                    shutdown = true;
+                    GameActivity.gameActivity.updateScoreBoard();
+                }
             }
         }
     };
-
     public MenuFragment() {
         // Required empty public constructor
     }
@@ -67,13 +68,14 @@ public class MenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         score = GameActivity.SCORE;
+        frameLayout = view.findViewById(R.id.fragment_container);
         scoreScreen = view.findViewById(R.id.score);
         scoreScreen.setText(String.format("Score: %d", score));
         helpButton = view.findViewById(R.id.help);
         startButton = view.findViewById(R.id.startButton);
         timer = view.findViewById(R.id.timer);
-
         startButton.setOnClickListener(v -> {
+            GameActivity.gameActivity.startGame();
             timerRunnable.run();
         });
 
