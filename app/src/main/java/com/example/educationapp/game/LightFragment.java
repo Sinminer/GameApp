@@ -25,8 +25,8 @@ import static com.example.educationapp.R.color.White;
  * A simple {@link Fragment} subclass.
  */
 public class LightFragment extends Fragment implements View.OnClickListener {
-    Button light1;
-    Button light2;
+    private Button light1;
+    private Button light2;
     Button light3;
     Button light4;
     Integer currentLights = 0;

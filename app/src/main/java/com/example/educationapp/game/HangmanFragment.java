@@ -33,7 +33,6 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
     private int numCorr;
     private String currWord;
     private String[] words;
-    private Random random;
     private LinearLayout wordLayout;
     private TextView[] charViews;
     private GridView letterGrid;
@@ -51,13 +50,12 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hangman, container, false);
         letterGrid = view.findViewById(R.id.letters);
-        letterAdapater = new LetterAdapter(view.getContext());
-        letterGrid.setAdapter(letterAdapater);
-        random = new Random();
-        letterGrid.setOnItemClickListener(this);
+
         currWord = "";
         currPart = 0;
-
+        letterGrid.setOnItemClickListener(this);
+        letterAdapater = new LetterAdapter(view.getContext());
+        letterGrid.setAdapter(letterAdapater);
         numCorr = 0;
         bodyParts = new ImageView[numParts];
         words = getResources().getStringArray(R.array.words);
@@ -67,19 +65,16 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
         bodyParts[3] = view.findViewById(R.id.arm2);
         bodyParts[4] = view.findViewById(R.id.leg1);
         bodyParts[5] = view.findViewById(R.id.leg2);
-        for (int p = 0; p < numParts; p++) {
-            bodyParts[p].setVisibility(View.INVISIBLE);
-        }
-
+        hideParts();
         wordLayout = view.findViewById(R.id.word);
-
         makeGame();
         return view;
 
     }
 
     private void makeGame() {
-
+        Random random = new Random();
+        letterGrid.setAdapter(letterAdapater);
         currWord = words[random.nextInt(words.length)];
         charViews = new TextView[currWord.length()];
         numChars = currWord.length();
@@ -126,14 +121,21 @@ public class HangmanFragment extends Fragment implements AdapterView.OnItemClick
             bodyParts[currPart].setVisibility(View.VISIBLE);
             currPart++;
         } else {
+            currPart = 0;
+            hideParts();
             makeGame();
             GameActivity.gameActivity.lostGame();
-            onDestroy();
         }
         if (numCorr == numChars) {
+            currPart = 0;
+            hideParts();
             makeGame();
             GameActivity.gameActivity.endGame();
-            onDestroy();
+        }
+    }
+    public void hideParts(){
+        for (int p = 0; p < numParts; p++) {
+            bodyParts[p].setVisibility(View.INVISIBLE);
         }
     }
 

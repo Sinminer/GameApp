@@ -1,26 +1,20 @@
 package com.example.educationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.example.educationapp.database.DatabaseHelper;
-import com.example.educationapp.game.MenuFragment;
+
 
 public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
-    private Button playButton;
     private static final String NAME = "NAME";
-    private Button settingsButton;
     EditText nameView;
     String name;
     Button highScores;
@@ -31,25 +25,21 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         setContentView(R.layout.activity_main);
         highScores = findViewById(R.id.highScores);
         nameView = findViewById(R.id.textView);
-        playButton = findViewById(R.id.playButton);
-        playButton.setOnClickListener((v) -> {
-            name = (nameView.getText().toString());
-            openGame();
-        });
-        settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener((v) -> {
-            openSettings();
-        });
-        highScores.setOnClickListener((v -> {
-            openHighScores();
-        }));
-
+        Button playButton = findViewById(R.id.playButton);
+        playButton.setOnClickListener((v) -> openGame());
+        Button settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener((v) -> openSettings());
+        highScores.setOnClickListener((v -> openHighScores()));
+        SQLiteOpenHelper databaseHelper = new DatabaseHelper(this);
+        SQLiteDatabase database = databaseHelper.getReadableDatabase();
+        database.isOpen();
     }
     public void openSettings(){
         Intent intent = new Intent(this,SettingsActivity.class);
         startActivity(intent);
     }
     public void openGame(){
+        name = nameView.getText().toString();
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(NAME,name);
         startActivity(intent);
@@ -67,5 +57,10 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
             name = nameView.getText().toString();
         }
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -30,27 +29,31 @@ import com.example.educationapp.game.ShakerFragment;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener, View.OnClickListener, SensorEventListener {
-DatabaseHelper dbHelper;
     HangmanFragment hangmanFragment;
+    DatabaseHelper databaseHelper;
     LightFragment lightFragment;
     TextView updateScore;
     ShakerFragment shakerFragment;
     ArrayList<Fragment> fragments;
     private static final String NAME = "NAME";
-    public static int SCORE = 0;
+    public static int score = 0;
     String name;
     Random random;
     FrameLayout frameLayout;
     Intent mainIntent;
+     @SuppressLint("StaticFieldLeak")
      public static GameActivity gameActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        mainIntent = getIntent();
+        name = mainIntent.getStringExtra(NAME);
         frameLayout = findViewById(R.id.fragment_container);
         gameActivity = this;
         random = new Random();
@@ -64,10 +67,8 @@ DatabaseHelper dbHelper;
         fragments.add(shakerFragment);
         fragments.add(lightFragment);
 
-        mainIntent = new Intent(this,MainActivity.class);
-        name = mainIntent.getStringExtra(NAME);
+         databaseHelper = new DatabaseHelper(this);
 
-        dbHelper = new DatabaseHelper(this);
     }
     public void startGame(){
         frameLayout.setVisibility(View.VISIBLE);
@@ -91,9 +92,9 @@ DatabaseHelper dbHelper;
     }
 
     public void endGame(){
-        SCORE++;
+        score++;
         updateScore = findViewById(R.id.score);
-       updateScore.setText(String.format("Score: %d", SCORE));
+       updateScore.setText(String.format(Locale.getDefault(),"Score: %d", score));
         FragmentTransaction fragmentTransaction;
          fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragments.get(random.nextInt(3)));
@@ -102,7 +103,7 @@ DatabaseHelper dbHelper;
 
     public void lostGame(){
         updateScore = findViewById(R.id.score);
-        updateScore.setText(String.format("Score: %d", SCORE));
+        updateScore.setText(String.format(Locale.getDefault(),"Score: %d", score));
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragments.get(random.nextInt(3)));
@@ -119,7 +120,8 @@ DatabaseHelper dbHelper;
         shakerFragment.onAccuracyChanged(sensor,accuracy);
     }
     public void updateScoreBoard(){
-        dbHelper.insertScore(dbHelper.getDatabase(),"PLAYERSCORE",name,SCORE);
-        startActivity(mainIntent);
+        databaseHelper.insertScore(databaseHelper.getDatabase(),"PLAYERSCORE",name, score);
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }

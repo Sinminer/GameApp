@@ -1,6 +1,5 @@
 package com.example.educationapp.game;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,10 +19,6 @@ import com.example.educationapp.GameActivity;
 import com.example.educationapp.MainActivity;
 import com.example.educationapp.R;
 
-import org.w3c.dom.Text;
-
-import java.util.Timer;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -41,7 +36,7 @@ public class MenuFragment extends Fragment {
     ImageButton backButton;
     FrameLayout frameLayout;
     TextView timer;
-    int time = 5;
+    int time = 60;
     boolean shutdown = false;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
@@ -67,7 +62,7 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
-        score = GameActivity.SCORE;
+        score = GameActivity.score;
         frameLayout = view.findViewById(R.id.fragment_container);
         scoreScreen = view.findViewById(R.id.score);
         scoreScreen.setText(String.format("Score: %d", score));

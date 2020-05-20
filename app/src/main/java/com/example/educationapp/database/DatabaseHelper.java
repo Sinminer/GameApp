@@ -33,6 +33,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertScore(SQLiteDatabase db,String TABLE, String name, int score) {
+        if (db == null){
+            db = this.getWritableDatabase();
+        }
         ContentValues values = new ContentValues();
         values.put("NAME", name);
         values.put("SCORE", score);

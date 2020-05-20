@@ -3,7 +3,6 @@ package com.example.educationapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Spinner;
 
 import com.example.educationapp.game.Difficulty;
