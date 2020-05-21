@@ -1,6 +1,5 @@
 package com.example.educationapp;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,6 +9,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.educationapp.database.DatabaseHelper;
 
 
@@ -23,13 +25,18 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button settingsButton = findViewById(R.id.settingsButton);
         highScores = findViewById(R.id.highScores);
         nameView = findViewById(R.id.textView);
         Button playButton = findViewById(R.id.playButton);
+
         playButton.setOnClickListener((v) -> openGame());
-        Button settingsButton = findViewById(R.id.settingsButton);
+
         settingsButton.setOnClickListener((v) -> openSettings());
+
         highScores.setOnClickListener((v -> openHighScores()));
+
         SQLiteOpenHelper databaseHelper = new DatabaseHelper(this);
         SQLiteDatabase database = databaseHelper.getReadableDatabase();
         database.isOpen();
@@ -46,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     }
 
     public void openHighScores(){
-
         Intent intent = new Intent(this,ScoresActivity.class);
         startActivity(intent);
     }

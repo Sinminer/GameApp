@@ -23,15 +23,18 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/head"
-        android:paddingLeft="108dp"
+        android:paddingStart="108dp"
         android:paddingTop="23dp"
-        android:src="@drawable/android_hangman_head" />
+        android:src="@drawable/android_hangman_head"
+        android:paddingEnd="0dp"
+        />
     <ImageView
         android:id="@+id/body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/body"
-        android:paddingLeft="120dp"
+        android:paddingStart="120dp"
+        android:paddingEnd="0dp"
         android:paddingTop="53dp"
         android:src="@drawable/android_hangman_body" />
     <ImageView
@@ -39,7 +42,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/arm"
-        android:paddingLeft="100dp"
+        android:paddingStart="100dp"
+        android:paddingEnd="0dp"
         android:paddingTop="60dp"
         android:src="@drawable/android_hangman_arm1" />
 
@@ -48,7 +52,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/arm"
-        android:paddingLeft="120dp"
+        android:paddingStart="120dp"
+        android:paddingEnd="0dp"
+
         android:paddingTop="60dp"
         android:src="@drawable/android_hangman_arm2" />
 
@@ -57,7 +63,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/leg"
-        android:paddingLeft="101dp"
+        android:paddingStart="101dp"
+        android:paddingEnd="0dp"
+
         android:paddingTop="90dp"
         android:src="@drawable/android_hangman_leg1" />
 
@@ -66,7 +74,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/leg"
-        android:paddingLeft="121dp"
+        android:paddingStart="121dp"
+        android:paddingEnd="0dp"
+
         android:paddingTop="90dp"
         android:src="@drawable/android_hangman_leg2" />
 </RelativeLayout>
